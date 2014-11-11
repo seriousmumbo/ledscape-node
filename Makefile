@@ -2,7 +2,7 @@
 
 all: build/Resource/wrapper.node AllFade.js ledscape.js
 
-build/Resource/wrapper.node: wrapper.cc Ledscape*Wrapper.*
+build/Resource/wrapper.node: wrapper.cc
 	node-gyp configure build
 
 ledscape.js: src/ledscape.coffee
