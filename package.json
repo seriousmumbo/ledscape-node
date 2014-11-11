@@ -1,6 +1,6 @@
 {
   "name": "ledscape-node",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "dependencies": {
     "color": "0.7.x"
   },
