@@ -10,39 +10,47 @@ Otherwise, use `npm install seriousmumbo/ledscape-node`.
 #### Using preinstalled animations ####
 In CoffeeScript:
 
-	ledscape = require "ledscape-node"
-	AllFade = ledscape.anim "AllFade"
-	allfade = new AllFade
-		duration: 2.0
+```coffee
+ledscape = require "ledscape-node"
+AllFade = ledscape.anim "AllFade"
+allfade = new AllFade
+	duration: 2.0
+allfade.fade ->
 	allfade.fade ->
-		allfade.fade ->
-			console.log "Faded twice."
+		console.log "Faded twice."
+```
 
 In JavaScript:
 
-	var ledscape = require("ledscape-node");
-	var AllFade = ledscape.anim("AllFade");
-	var allfade = new AllFade({duration: 2.0});
+```node
+var ledscape = require("ledscape-node");
+var AllFade = ledscape.anim("AllFade");
+var allfade = new AllFade({duration: 2.0});
+allfade.fade(function() {
 	allfade.fade(function() {
-		allfade.fade(function() {
-			console.log("Faded twice.");
-		});
+		console.log("Faded twice.");
 	});
+});
+```
 
 #### Creating your own animations ####
 In CoffeeScript:
 
-	ledscape = require "ledscape-node"
-	ledscape.init pixelsPerStrip, strips
-	ledscape.fillColor frame, rgb...
-	# Other ledscape.* calls...
+```coffee
+ledscape = require "ledscape-node"
+ledscape.init pixelsPerStrip, strips
+ledscape.fillColor frame, rgb...
+# Other ledscape.* calls...
+```
 
 In JavaScript:
 
-	var ledscape = require("ledscape-node")
-	ledscape.init(pixelsPerStrip, strips);
-	ledscape.fillColor(frame, rgb[0], rgb[1], rgb[2]);
-	// Other ledscape.* calls...
+```node
+var ledscape = require("ledscape-node")
+ledscape.init(pixelsPerStrip, strips);
+ledscape.fillColor(frame, rgb[0], rgb[1], rgb[2]);
+// Other ledscape.* calls...
+```
 
 ## Testing ##
 You can download a copy and test it locally.
