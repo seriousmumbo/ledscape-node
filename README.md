@@ -8,8 +8,8 @@ If the module is private, use `npm install git+ssh://git@github.com:seriousmumbo
 Otherwise, use `npm install seriousmumbo/ledscape-node`.
 
 #### Using preinstalled animations ####
+In CoffeeScript:
 
-	# CoffeeScript
 	ledscape = require "ledscape-node"
 	AllFade = ledscape.anim "AllFade"
 	allfade = new AllFade
@@ -18,7 +18,8 @@ Otherwise, use `npm install seriousmumbo/ledscape-node`.
 		allfade.fade ->
 			console.log "Faded twice."
 
-	// JavaScript
+In JavaScript:
+
 	var ledscape = require("ledscape-node");
 	var AllFade = ledscape.anim("AllFade");
 	var allfade = new AllFade({duration: 2.0});
@@ -29,14 +30,15 @@ Otherwise, use `npm install seriousmumbo/ledscape-node`.
 	});
 
 #### Creating your own animations ####
+In CoffeeScript:
 
-	# CoffeeScript
 	ledscape = require "ledscape-node"
 	ledscape.init pixelsPerStrip, strips
 	ledscape.fillColor frame, rgb...
 	# Other ledscape.* calls...
 
-	// JavaScript
+In JavaScript:
+
 	var ledscape = require("ledscape-node")
 	ledscape.init(pixelsPerStrip, strips);
 	ledscape.fillColor(frame, rgb[0], rgb[1], rgb[2]);
