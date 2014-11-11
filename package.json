@@ -1,0 +1,13 @@
+{
+	"name": "ledscape-node",
+	"version": "0.0.2",
+	"dependencies": {
+		"color": "0.7.x"
+	},
+	"scripts": {
+		"preinstall": "make premake",
+		"install": "make",
+		"test": "make test"
+	},
+	"main": "ledscape.js"
+}
