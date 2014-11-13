@@ -17,8 +17,9 @@ anim/AllFade.js: src/AllFade.coffee
 premake:
 	git submodule init
 	git submodule update
-	cd ledscape/; make
+	cp overwrite/interface-makefile ledscape/am335x/app_loader/interface/Makefile
 	cd ledscape/am335x/app_loader/interface/; make
+	cd ledscape/; make
 
 test: all
 	node tests/test.js
