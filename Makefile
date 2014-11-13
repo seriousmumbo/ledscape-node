@@ -1,6 +1,6 @@
 .SUFFIXES:
 
-all: build/Resource/wrapper.node AllFade.js ledscape.js
+all: build/Resource/wrapper.node anim/AllFade.js ledscape.js
 
 build/Resource/wrapper.node: wrapper.cc
 	node-gyp configure build
