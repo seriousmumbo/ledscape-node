@@ -15,7 +15,6 @@ anim/AllFade.js: src/AllFade.coffee
 	mv src/AllFade.js anim/
 
 premake:
-	npm install -S coffee-script
 	git submodule init
 	git submodule update
 

@@ -2,7 +2,8 @@
   "name": "ledscape-node",
   "version": "0.1.8",
   "dependencies": {
-    "color": "0.7.x"
+    "color": "0.7.x",
+    "coffee-script": "1.8.x"
   },
   "scripts": {
     "preinstall": "make premake",
