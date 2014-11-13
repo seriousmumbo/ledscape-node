@@ -17,6 +17,7 @@ anim/AllFade.js: src/AllFade.coffee
 premake:
 	git submodule init
 	git submodule update
+	cd ledscape/; make
 
 test: all
 	node tests/test.js
