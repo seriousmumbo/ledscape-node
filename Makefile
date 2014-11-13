@@ -18,6 +18,7 @@ premake:
 	git submodule init
 	git submodule update
 	cd ledscape/; make
+	cd ledscape/am335x/app_loader/interface/; make
 
 test: all
 	node tests/test.js
