@@ -1,10 +1,7 @@
 var Ledscape = require("../ledscape");
 var AllFade = Ledscape.anim("AllFade");
 var readline = require("readline");
-var rl = readline.createInterface({
-	input: process.stdin,
-	output: process,stdout
-});
+var rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
 var stopAtEnd = false;
 
