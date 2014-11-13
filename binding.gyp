@@ -5,7 +5,7 @@
       "sources": [ "wrapper.cc" ],
       "libraries": [ "../ledscape/ledscape.o", 
                      "../ledscape/pru.o",
-                     "../ledscape/am335x/app_loader/interface/release/prussdrv.o" ],
+                     "../ledscape/am335x/app_loader/interface/prussdrv.o" ],
       "comment": {
         'include_dirs': [
           '../ledscape',
