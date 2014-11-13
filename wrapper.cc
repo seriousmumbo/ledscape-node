@@ -72,4 +72,4 @@ void InitAll(Handle<Object> exports, Handle<Object> module) {
      FunctionTemplate::New(LedscapeClose)->GetFunction());
 }
 
-NODE_MODULE(nodeledscape, InitAll)
+NODE_MODULE(wrapper, InitAll)
