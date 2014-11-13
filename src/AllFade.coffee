@@ -39,3 +39,5 @@ class AllFade
 		color = color.saturate(ratio)
 		color = color.whiten(ratio)
 		color.rbgArray()
+
+modules.export = AllFade
