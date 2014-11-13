@@ -11,7 +11,7 @@ ledscape.js: src/ledscape.coffee
 
 anim/AllFade.js: src/AllFade.coffee
 	mkdir -p anim/
-	node_modules/.bin/coffee -c AllFade.coffee
+	node_modules/.bin/coffee -c src/AllFade.coffee
 	mv src/AllFade.js anim/
 
 premake:
