@@ -6,16 +6,16 @@ build/Resource/wrapper.node: wrapper.cc
 	node-gyp configure build
 
 ledscape.js: src/ledscape.coffee
-	coffee -c src/ledscape.coffee
+	node_modules/.bin/coffee -c src/ledscape.coffee
 	mv src/ledscape.js ./
 
 anim/AllFade.js: src/AllFade.coffee
 	mkdir -p anim/
-	coffee -c AllFade.coffee
+	node_modules/.bin/coffee -c AllFade.coffee
 	mv src/AllFade.js anim/
 
 premake:
-	npm install -g coffee-script
+	npm install -S coffee-script
 	git submodule init
 	git submodule update
 
