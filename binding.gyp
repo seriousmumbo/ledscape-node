@@ -1,8 +1,8 @@
 {
   "targets": [
     {
-      "target_name": "nodeledscape",
-      "sources": [ "nodeledscape.cc" ],
+      "target_name": "wrapper",
+      "sources": [ "wrapper.cc" ],
       "libraries": [ "../ledscape/ledscape.o", 
                      "../ledscape/pru.o",
                      "../ledscape/am335x/app_loader/interface/prussdrv.o" ],
