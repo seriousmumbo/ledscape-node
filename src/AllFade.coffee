@@ -40,4 +40,4 @@ class AllFade
 		color = color.whiten(ratio)
 		color.rbgArray()
 
-module.export = AllFade
+module.exports = AllFade
