@@ -22,7 +22,7 @@ class AllFade
 		@timer = setInterval @draw, @interval
 		@draw()
 	draw: =>
-		color = @time2color()
+		rgb = @time2color()
 		return @cb() if !color
 		framenum = @frame0 ? 0 : 1
 		@Ledscape.fillColor framenum, rgb...
