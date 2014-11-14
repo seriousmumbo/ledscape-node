@@ -73,6 +73,20 @@ static Handle<Value> LedscapeFillColor(const Arguments& args) {
   return v8::Boolean::New(true);
 }
 
+static Handle<Value> LedscapeSetColor(const Arguments& args) {
+  HandleScope scope;
+  const unsigned frame_num = args[0]->NumberValue();
+  const unsigned strip_num = args[1]->NumberValue();
+  const unsigned pixel_num = args[2]->NumberValue();
+  const uint8_t r = args[3]->NumberValue();
+  const uint8_t g = args[4]->NumberValue();
+  const uint8_t b = args[5]->NumberValue();
+  ledscape_frame_t * const frame = ledscape_frame(leds, frame_num);
+  ledscape_set_color(frame, strip_num, pixel_num, r, g, b);
+  ledscape_wait(leds);
+  return v8::Boolean::New(true);
+}
+
 void InitAll(Handle<Object> exports, Handle<Object> module) {
    exports->Set(String::NewSymbol("init"),
      FunctionTemplate::New(LedscapeInit)->GetFunction());
@@ -80,6 +94,8 @@ void InitAll(Handle<Object> exports, Handle<Object> module) {
      FunctionTemplate::New(LedscapeDraw)->GetFunction()); 
    exports->Set(String::NewSymbol("fillColor"),
      FunctionTemplate::New(LedscapeFillColor)->GetFunction());
+   exports->Set(String::NewSymbol("setColor"),
+     FunctionTemplate::New(LedscapeSetColor)->GetFunction());
    exports->Set(String::NewSymbol("close"),
      FunctionTemplate::New(LedscapeClose)->GetFunction());
 }
