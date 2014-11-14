@@ -12,7 +12,7 @@ class AllFade
 		@Ledscape = require "../ledscape"
 		@Color = @Ledscape.color()
 		@frame0 = true # is frame 0
-		@Ledscape.init config.pixelsPerStrip, numberOfStrips
+		@Ledscape.init @config.pixelsPerStrip, @config.numberOfStrips
 	fade = (@cb) ->
 		@start = new Date().getTime()
 		@done = Math.round @config.duration * 1000
