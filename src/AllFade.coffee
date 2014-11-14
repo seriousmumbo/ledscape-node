@@ -19,7 +19,7 @@ class AllFade
 		@range = Math.abs @config.to - @config.from
 		@dir = if @config.from > @config.to then -1 else 1
 		@interval = Math.round 1000.0 / @config.fps
-		@timer = setInterval draw, interval
+		@timer = setInterval @draw, @interval
 		@draw()
 	draw: =>
 		color = @time2color()
