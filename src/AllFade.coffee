@@ -13,7 +13,7 @@ class AllFade
 		@Color = @Ledscape.color()
 		@frame0 = true # is frame 0
 		@Ledscape.init @config.pixelsPerStrip, @config.numberOfStrips
-	fade = (@cb) ->
+	fade: (@cb) ->
 		@start = new Date().getTime()
 		@done = Math.round @config.duration * 1000
 		@range = Math.abs @config.to - @config.from
