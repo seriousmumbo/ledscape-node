@@ -5,13 +5,20 @@ var rl = readline.createInterface({ input: process.stdin, output: process.stdout
 
 var stopAtEnd = false;
 
+var allfadeIn = new AllFade({
+	from: 0,
+	to: 255,
+	duration: 1.0
+});
+
+var allfade = new AllFade({
+	from: 255,
+	to: 0,
+	duration: 1.0
+});
+
 function fadeOut() {
-	var allfade = new AllFade({
-		from: 255,
-		to: 0,
-		duration: 1.0
-	});
-	allfade.fade(function() {
+	allfadeOut.fade(function() {
 		if(!stopAtEnd) {
 			fadeIn();
 		}
@@ -19,12 +26,7 @@ function fadeOut() {
 }
 
 function fadeIn() {
-	var allfade = new AllFade({
-		from: 0,
-		to: 255,
-		duration: 1.0
-	});
-	allfade.fade(function() {
+	allfadeIn.fade(function() {
 		fadeOut();
 	});
 }
