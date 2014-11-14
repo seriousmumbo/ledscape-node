@@ -11,7 +11,7 @@ var allfadeIn = new AllFade({
 	duration: 1.0
 });
 
-var allfade = new AllFade({
+var allfadeOut = new AllFade({
 	from: 255,
 	to: 0,
 	duration: 1.0
