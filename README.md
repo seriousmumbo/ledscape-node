@@ -59,3 +59,5 @@ You can download a copy and test it locally.
 	cd ledscape-node
 	npm install
 	npm test
+
+If running as `root`, use `npm install --unsafe-perm` instead, to confirm with NPM that you are requesting root permissions to make changes to the folder.
