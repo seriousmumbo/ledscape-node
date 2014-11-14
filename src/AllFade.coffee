@@ -17,7 +17,7 @@ class AllFade
 		@start = new Date().getTime()
 		@done = Math.round @config.duration * 1000
 		@range = Math.abs @config.to - @config.from
-		@dir = if opts.rom > opts.to then -1 else 1
+		@dir = if @config.from > @config.to then -1 else 1
 		@interval = Math.round 1000.0 / @config.fps
 		@timer = setInterval draw, interval
 		@draw()
