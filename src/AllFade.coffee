@@ -39,6 +39,6 @@ class AllFade
 			.rotate 180.0*ratio
 			.saturate ratio
 			.whiten ratio
-		color.rbgArray()
+		color.rgbArray()
 
 module.exports = AllFade
