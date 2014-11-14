@@ -35,9 +35,10 @@ class AllFade
 			clearInterval @timer
 			return false
 		ratio = (elapsed*1.0)/(@done*1.0)
-		color = color.rotate(180.0*ratio)
-		color = color.saturate(ratio)
-		color = color.whiten(ratio)
+		color
+			.rotate 180.0*ratio
+			.saturate ratio
+			.whiten ratio
 		color.rbgArray()
 
 module.exports = AllFade
