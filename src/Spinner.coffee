@@ -65,3 +65,5 @@ class Spinner
 		new Date().getTime() - @start
 	cycleLengthMillis: ->
 		@main.cycleLength * 1000
+
+module.exports = Spinner
