@@ -34,7 +34,7 @@ class AllFade
 		if elapsed >= @done
 			clearInterval @timer
 			return false
-		@ratio = (elapsed*1.0)/(@done*1.0)
+		ratio = (elapsed*1.0)/(@done*1.0)
 		color = color.rotate(180.0*ratio)
 		color = color.saturate(ratio)
 		color = color.whiten(ratio)
