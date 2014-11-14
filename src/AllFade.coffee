@@ -30,7 +30,7 @@ class AllFade
 		@frame0 = !@frame0
 	time2color: =>
 		elapsed = new Date().getTime() - @start
-		color = new @Color '22ff66'
+		color = new @Color '#22ff66'
 		if elapsed >= @done
 			clearInterval @timer
 			return false
