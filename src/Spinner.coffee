@@ -60,7 +60,7 @@ class Spinner
 		position = linearPosition * positionMultiplier
 		Math.floor(position/@config.points)*@config.points
 	center: ->
-		return (@millis() / @config.centerCycleDivider) % @cycleLengthMillis()
+		return (@millis() / @config.cycleCenterDivider) % @cycleLengthMillis()
 		# (@configcycleLength / 3) * 1000
 	millis: ->
 		new Date().getTime() - @start
