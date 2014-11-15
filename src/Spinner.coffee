@@ -50,7 +50,7 @@ class Spinner
 		@Ledscape.setColor 1, 1, position(@config.cycleLength / 8), @config.color...
 		@Ledscape.setColor 1, 1, position(@config.cycleLength / 4), @config.color...
 	position: (offset) ->
-		cycleTick = (@millis() + (offset * 1000) + (@center()) % @cycleLengthMillis()
+		cycleTick = @millis() + (offset * 1000) + (@center()) % @cycleLengthMillis()
 		portionOfCycle = cycleTick / @cycleLengthMillis()
 		totalRadiansPerCycle = Math.PI / 2
 		radianPosition = portionOfCycle * totalRadiansPerCycle
