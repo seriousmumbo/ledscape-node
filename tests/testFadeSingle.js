@@ -27,7 +27,7 @@ var stopAtEnd = false;
 var anim = new FadeSingle({
 	from: 0,
 	to: 255,
-	duration: 1.0
+	duration: 10
 });
 
 function fade() {
