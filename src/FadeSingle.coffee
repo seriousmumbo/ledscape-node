@@ -33,7 +33,6 @@ class FadeSingle
 	fade: (@cb) ->
 		@start = new Date().getTime()
 		@done = Math.round @config.duration * 1000
-		@down = no
 		@interval = Math.round 1000.0 / @config.fps
 		@timer = setInterval @draw, @interval
 		@draw()
