@@ -61,10 +61,10 @@ class Spinner
 		Math.floor(position/points)*points
 	center: ->
 		return (@millis() / @config.centerCycleDivider) % @cycleLengthMillis()
-		# (cycleLength / 3) * 1000
+		# (@configcycleLength / 3) * 1000
 	millis: ->
 		new Date().getTime() - @start
 	cycleLengthMillis: ->
-		@main.cycleLength * 1000
+		@config.cycleLength * 1000
 
 module.exports = Spinner
