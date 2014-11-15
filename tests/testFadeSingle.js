@@ -33,7 +33,7 @@ var anim = new FadeSingle({
 function fade() {
 	anim.fade(function() {
 		if(!stopAtEnd) {
-			//fade();
+			fade();
 		}
 	});
 }

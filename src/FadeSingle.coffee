@@ -38,7 +38,7 @@ class FadeSingle
 		@draw()
 	draw: =>
 		rgb = @time2color()
-		return @cb() if !rgb
+		return if !rgb
 		framenum = @frame0 ? 0 : 1
 		@Ledscape.fillColor framenum, rgb...
 		@Ledscape.draw framenum
@@ -47,6 +47,7 @@ class FadeSingle
 		elapsed = new Date().getTime() - @start
 		if elapsed >= @done
 			clearInterval @timer
+			@cb()
 			return false
 		ratio = (1-Math.cos(2*Math.PI*(elapsed*1.0)/(@done*1.0)))/2
 		c = @config.color
