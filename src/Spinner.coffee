@@ -38,7 +38,7 @@ class Spinner
 		@Ledscape.fillColor 0, @config.backgroundColor...
 		@interval = Math.floor 1000 * (1 / @config.fps)
 		@timer = setInterval @draw, @interval
-	draw: ->
+	draw: =>
 		if @frame0
 			drawFrame()
 		@frame0 = !@frame0
