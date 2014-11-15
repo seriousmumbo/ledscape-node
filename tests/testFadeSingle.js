@@ -24,11 +24,7 @@ var rl = readline.createInterface({ input: process.stdin, output: process.stdout
 
 var stopAtEnd = false;
 
-var anim = new FadeSingle({
-	from: 0,
-	to: 255,
-	duration: 10
-});
+var anim = new FadeSingle({});
 
 function fade() {
 	anim.fade(function() {

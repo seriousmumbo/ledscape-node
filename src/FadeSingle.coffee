@@ -22,8 +22,9 @@ class FadeSingle
 		pixelsPerStrip: 64
 		numberOfStrips: 48
 		fps: 100
-		duration: 0.65
-		color: [255,255,255]
+		duration: 20
+		color: [190,190,190]
+		brightness: 1
 	constructor: (opts) ->
 		for key, val of opts
 			@config[key] = val
