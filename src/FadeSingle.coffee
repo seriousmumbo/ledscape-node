@@ -23,8 +23,8 @@ class FadeSingle
 		numberOfStrips: 48
 		fps: 100
 		duration: 20
-		color: [190,190,190]
-		brightness: 1
+		color: [255,255,255]
+		brightness: 75
 	constructor: (opts) ->
 		for key, val of opts
 			@config[key] = val
@@ -52,7 +52,7 @@ class FadeSingle
 			return false
 		ratio = (1-Math.cos(2*Math.PI*(elapsed*1.0)/(@done*1.0)))/2
 		c = @config.color
-		[ratio*c[0], ratio*c[1], ratio*c[2]]
+		[ratio*c[0]*brightness, ratio*c[1]*brightness, ratio*c[2]*brightness]
 		
 
 module.exports = FadeSingle
