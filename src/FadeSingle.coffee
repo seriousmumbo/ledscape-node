@@ -49,11 +49,7 @@ class FadeSingle
 		if elapsed >= @done
 			clearInterval @timer
 			return false
-		if @down or ((@done/2) > elapsed)
-			@down = yes
-			ratio = 2 - 2*(elapsed*1.0)/(@done*1.0)
-		else
-			ratio = 2*(elapsed*1.0)/(@done*1.0)
+		ratio = (1-Math.cos((elapsed*1.0)/(@done*1.0)))/2
 		c = @config.color
 		[ratio*c[0], ratio*c[1], ratio*c[2]]
 		
