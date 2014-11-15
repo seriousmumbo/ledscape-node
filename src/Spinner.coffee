@@ -40,7 +40,7 @@ class Spinner
 		@timer = setInterval @draw, @interval
 	draw: =>
 		if @frame0
-			drawFrame()
+			@drawFrame()
 		@frame0 = !@frame0
 		framenum = @frame0 ? 0 : 1
 		@Ledscape.draw framenum
