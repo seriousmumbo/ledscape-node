@@ -62,7 +62,7 @@ static Handle<Value> LedscapeFillColor(const Arguments& args) {
   const uint8_t r = args[1]->NumberValue();
   const uint8_t g = args[2]->NumberValue();
   const uint8_t b = args[3]->NumberValue();
-  printf("nodeledscape fillcolor %d %d %d ", r,g,b);
+  printf("nodeledscape fillcolor %d %d %d \n", r,g,b);
   ledscape_frame_t * const frame = ledscape_frame(leds, frame_num);
   for(unsigned i=0; i < num_pixels; i++) {
     for(unsigned strip=0; strip < num_strips; strip++) {
@@ -79,7 +79,7 @@ static Handle<Value> LedscapeFillColorNoWait(const Arguments& args) {
   const uint8_t r = args[1]->NumberValue();
   const uint8_t g = args[2]->NumberValue();
   const uint8_t b = args[3]->NumberValue();
-  printf("nodeledscape fillcolor (nowait) %d %d %d ", r,g,b);
+  printf("nodeledscape fillcolor (nowait) %d %d %d \n", r,g,b);
   ledscape_frame_t * const frame = ledscape_frame(leds, frame_num);
   for(unsigned i=0; i < num_pixels; i++) {
     for(unsigned strip=0; strip < num_strips; strip++) {
@@ -97,7 +97,7 @@ static Handle<Value> LedscapeSetColor(const Arguments& args) {
   const uint8_t r = args[3]->NumberValue();
   const uint8_t g = args[4]->NumberValue();
   const uint8_t b = args[5]->NumberValue();
-  printf("nodeledscape drawing pixel (setcolor) at position %d", pixel_num);
+  printf("nodeledscape drawing pixel (setcolor) at position %d \n", pixel_num);
   ledscape_frame_t * const frame = ledscape_frame(leds, frame_num);
   ledscape_set_color(frame, strip_num, pixel_num, r, g, b);
   ledscape_wait(leds);
@@ -112,7 +112,7 @@ static Handle<Value> LedscapeSetColorNoWait(const Arguments& args) {
   const uint8_t r = args[3]->NumberValue();
   const uint8_t g = args[4]->NumberValue();
   const uint8_t b = args[5]->NumberValue();
-  printf("nodeledscape drawing pixel (setcolor nowait) at position %d", pixel_num);
+  printf("nodeledscape drawing pixel (setcolor nowait) at position %d \n", pixel_num);
   ledscape_frame_t * const frame = ledscape_frame(leds, frame_num);
   ledscape_set_color(frame, strip_num, pixel_num, r, g, b);
   return v8::Boolean::New(true);
