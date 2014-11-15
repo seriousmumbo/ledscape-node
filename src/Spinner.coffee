@@ -58,7 +58,7 @@ class Spinner
 		linearPosition = Math.sin radianPosition
 		positionMultiplier = @config.totalSize
 		position = linearPosition * positionMultiplier
-		Math.floor(position/points)*points
+		Math.floor(position/@config.points)*@config.points
 	center: ->
 		return (@millis() / @config.centerCycleDivider) % @cycleLengthMillis()
 		# (@configcycleLength / 3) * 1000
