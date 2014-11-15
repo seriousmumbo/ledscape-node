@@ -52,7 +52,7 @@ class FadeSingle
 			return false
 		ratio = (1-Math.cos(2*Math.PI*(elapsed*1.0)/(@done*1.0)))/2
 		c = @config.color
-		[ratio*c[0]*brightness, ratio*c[1]*brightness, ratio*c[2]*brightness]
+		[ratio*c[0]*@brightness, ratio*c[1]*@brightness, ratio*c[2]*@brightness]
 		
 
 module.exports = FadeSingle
