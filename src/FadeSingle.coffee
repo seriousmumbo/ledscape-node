@@ -51,7 +51,7 @@ class FadeSingle
 			return false
 		if @down or ((@done/2) > elapsed)
 			@down = yes
-			ratio = 1 - 2*(elapsed*1.0)/(@done*1.0)
+			ratio = 2 - 2*(elapsed*1.0)/(@done*1.0)
 		else
 			ratio = 2*(elapsed*1.0)/(@done*1.0)
 		c = @config.color
