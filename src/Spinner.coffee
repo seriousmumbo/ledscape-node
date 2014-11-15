@@ -54,10 +54,10 @@ class Spinner
 		portionOfCycle = cycleTick / @cycleLengthMillis()
 		totalRadiansPerCycle = Math.PI / 2
 		radianPosition = portionOfCycle * totalRadiansPerCycle
-		linearPosition = sin(radianPosition)
-		positionMultiplier = @config.totalSize;
-		position = linearPosition * positionMultiplier;
-		floor(position/points)*points
+		linearPosition = Math.sin radianPosition
+		positionMultiplier = @config.totalSize
+		position = linearPosition * positionMultiplier
+		Math.floor(position/points)*points
 	cycle: ->
 		return (@millis() / @config.centerCycleDivider) % @cycleLengthMillis()
 		# (cycleLength / 3) * 1000
