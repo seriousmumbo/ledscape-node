@@ -24,7 +24,7 @@ class FadeSingle
 		fps: 100
 		duration: 20
 		color: [255,255,255]
-		brightness: 75
+		brightness: 0.75
 	constructor: (opts) ->
 		for key, val of opts
 			@config[key] = val
