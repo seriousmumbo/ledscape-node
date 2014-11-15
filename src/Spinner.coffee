@@ -59,7 +59,7 @@ class Spinner
 		positionMultiplier = @config.totalSize
 		position = linearPosition * positionMultiplier
 		Math.floor(position/points)*points
-	cycle: ->
+	center: ->
 		return (@millis() / @config.centerCycleDivider) % @cycleLengthMillis()
 		# (cycleLength / 3) * 1000
 	millis: ->
