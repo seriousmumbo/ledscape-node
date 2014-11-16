@@ -89,6 +89,43 @@ static Handle<Value> LedscapeFillColorNoWait(const Arguments& args) {
   return v8::Boolean::New(true);
 }
 
+static Handle<Value> LedscapeFillRange(const Arguments& args) {
+  HandleScope scope;
+  const unsigned frame_num = args[0]->NumberValue();
+  const unsigned start = args[1]->NumberValue();
+  const unsigned length = args[2]->NumberValue();
+  const uint8_t r = args[3]->NumberValue();
+  const uint8_t g = args[4]->NumberValue();
+  const uint8_t b = args[5]->NumberValue();
+  printf("nodeledscape fillrange (start %d, %d long) %d %d %d \n", start,length,r,g,b);
+  ledscape_frame_t * const frame = ledscape_frame(leds, frame_num);
+  for(unsigned i=start; i < length; i++) {
+    for(unsigned strip=0; strip < num_strips; strip++) {
+      ledscape_set_color(frame, strip, i, r, g, b);
+    }
+  }
+  ledscape_wait(leds);
+  return v8::Boolean::New(true);
+}
+
+static Handle<Value> LedscapeFillRangeNoWait(const Arguments& args) {
+  HandleScope scope;
+  const unsigned frame_num = args[0]->NumberValue();
+  const unsigned start = args[1]->NumberValue();
+  const unsigned length = args[2]->NumberValue();
+  const uint8_t r = args[3]->NumberValue();
+  const uint8_t g = args[4]->NumberValue();
+  const uint8_t b = args[5]->NumberValue();
+  printf("nodeledscape fillrange (nowait) (start %d, %d long) %d %d %d \n", start,length,r,g,b);
+  ledscape_frame_t * const frame = ledscape_frame(leds, frame_num);
+  for(unsigned i=start; i < length; i++) {
+    for(unsigned strip=0; strip < num_strips; strip++) {
+      ledscape_set_color(frame, strip, i, r, g, b);
+    }
+  }
+  return v8::Boolean::New(true);
+}
+
 static Handle<Value> LedscapeSetColor(const Arguments& args) {
   HandleScope scope;
   const unsigned frame_num = args[0]->NumberValue();
@@ -127,6 +164,10 @@ void InitAll(Handle<Object> exports, Handle<Object> module) {
      FunctionTemplate::New(LedscapeFillColor)->GetFunction());
    exports->Set(String::NewSymbol("fillColorNoWait"),
      FunctionTemplate::New(LedscapeFillColorNoWait)->GetFunction());
+   exports->Set(String::NewSymbol("fillRange"),
+     FunctionTemplate::New(LedscapeFillRange)->GetFunction());
+   exports->Set(String::NewSymbol("fillRangeNoWait"),
+     FunctionTemplate::New(LedscapeFillRangeNoWait)->GetFunction());
    exports->Set(String::NewSymbol("setColor"),
      FunctionTemplate::New(LedscapeSetColor)->GetFunction());
    exports->Set(String::NewSymbol("setColorNoWait"),
