@@ -32,7 +32,7 @@ class FullCircle
 		@Ledscape.init @config.pixelsPerStrip, @config.numberOfStrips
 	rotate: ->
 		@offset = 0
-		@interval = Math.round 1000.0 / @config.fps
+		@interval = Math.round 1000/@config.pixelsPerStrip
 		@timer = setInterval @draw, @interval
 		@draw()
 	draw: =>
