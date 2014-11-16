@@ -43,6 +43,5 @@ class FullCircle
 		@Ledscape.fillRange framenum, 0, offset, color[1]...
 		@Ledscape.draw framenum
 		@frame0 = !@frame0
-		
 
 module.exports = FullCircle
