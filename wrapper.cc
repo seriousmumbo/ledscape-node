@@ -129,6 +129,37 @@ static Handle<Value> LedscapeFillRangeNoWait(const Arguments& args) {
 static Handle<Value> LedscapeSetColor(const Arguments& args) {
   HandleScope scope;
   const unsigned frame_num = args[0]->NumberValue();
+  const unsigned pixel_num = args[1]->NumberValue();
+  const uint8_t r = args[2]->NumberValue();
+  const uint8_t g = args[3]->NumberValue();
+  const uint8_t b = args[4]->NumberValue();
+  printf("nodeledscape drawing pixel (setcolor) at position %d \n", pixel_num);
+  ledscape_frame_t * const frame = ledscape_frame(leds, frame_num);
+  for(unsigned strip=0; strip < num_strips; strip++) {
+    ledscape_set_color(frame, strip, pixel_num, r, g, b);
+  }
+  ledscape_wait(leds);
+  return v8::Boolean::New(true);
+}
+
+static Handle<Value> LedscapeSetColorNoWait(const Arguments& args) {
+  HandleScope scope;
+  const unsigned frame_num = args[0]->NumberValue();
+  const unsigned pixel_num = args[1]->NumberValue();
+  const uint8_t r = args[2]->NumberValue();
+  const uint8_t g = args[3]->NumberValue();
+  const uint8_t b = args[4]->NumberValue();
+  printf("nodeledscape drawing pixel (setcolor nowait) at position %d \n", pixel_num);
+  ledscape_frame_t * const frame = ledscape_frame(leds, frame_num);
+  for(unsigned strip=0; strip < num_strips; strip++) {
+    ledscape_set_color(frame, strip, pixel_num, r, g, b);
+  }
+  return v8::Boolean::New(true);
+}
+
+static Handle<Value> LedscapeSetColorStrip(const Arguments& args) {
+  HandleScope scope;
+  const unsigned frame_num = args[0]->NumberValue();
   const unsigned strip_num = args[1]->NumberValue();
   const unsigned pixel_num = args[2]->NumberValue();
   const uint8_t r = args[3]->NumberValue();
@@ -141,7 +172,7 @@ static Handle<Value> LedscapeSetColor(const Arguments& args) {
   return v8::Boolean::New(true);
 }
 
-static Handle<Value> LedscapeSetColorNoWait(const Arguments& args) {
+static Handle<Value> LedscapeSetColorStripNoWait(const Arguments& args) {
   HandleScope scope;
   const unsigned frame_num = args[0]->NumberValue();
   const unsigned strip_num = args[1]->NumberValue();

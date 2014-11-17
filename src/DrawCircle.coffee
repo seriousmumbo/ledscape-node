@@ -23,6 +23,7 @@ class DrawCircle
 		numberOfStrips: 48
 		duration: 10
 		colors: [[255,0,0],[128,0,0]]
+		startColor: [0,0,0]
 		brightness: 0.75
 	constructor: (opts) ->
 		for key, val of opts
@@ -37,8 +38,8 @@ class DrawCircle
 		@draw()
 	draw: =>
 		@offset++
-		@Ledscape.setColorNoWait 0, 0, @offset % @config.pixelsPerStrip, @config.colors[0]...
-		@Ledscape.setColor 0, 0, ((@config.pixelsPerStrip / 2) + @offset) % @config.pixelsPerStrip, @config.colors[1]...
+		@Ledscape.setColorNoWait 0, @offset % @config.pixelsPerStrip, @config.colors[0]...
+		@Ledscape.setColor 0, ((@config.pixelsPerStrip / 2) + @offset) % @config.pixelsPerStrip, @config.colors[1]...
 		@Ledscape.draw 0
 
 module.exports = DrawCircle
