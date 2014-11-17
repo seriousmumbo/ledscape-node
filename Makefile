@@ -33,6 +33,11 @@ anim/FullCircle.js: src/FullCircle.coffee
 	node_modules/.bin/coffee -c src/FullCircle.coffee
 	mv src/FullCircle.js anim/
 
+anim/DrawCircle.js: src/DrawCircle.coffee
+	mkdir -p anim/
+	node_modules/.bin/coffee -c src/DrawCircle.coffee
+	mv src/DrawCircle.js anim/
+
 premake:
 	git submodule init
 	git submodule update
