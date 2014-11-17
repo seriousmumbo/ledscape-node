@@ -36,7 +36,7 @@ class FullCircle
 		@timer = setInterval @draw, @interval
 		@draw()
 	draw: =>
-		@offset = (@offset + 1) % @config.pixelsPerStrip
+		@offset = (@offset + 1)
 		framenum = @frame0 ? 0 : 1
 		@Ledscape.fillRangeNoWait framenum, @offset, (@config.pixelsPerStrip/2), @config.colors[0]...
 		@Ledscape.fillRangeNoWait framenum, (@config.pixelsPerStrip/2)+@offset, (@config.pixelsPerStrip/2), @config.colors[1]...
