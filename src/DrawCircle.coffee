@@ -32,13 +32,13 @@ class DrawCircle
 	rotate: ->
 		@offset = 0
 		@interval = Math.round 1000/@config.pixelsPerStrip
-		@Ledscape.fillColor 0, @config.startColor
+		@Ledscape.fillColorNoWait 0, @config.startColor
 		@timer = setInterval @draw, @interval
 		@draw()
 	draw: =>
 		@offset++
 		@Ledscape.setColorNoWait 0, @offset % @config.pixelsPerStrip, @config.colors[0]...
-		@ledscape.setColor 0, ((@config.pixelsPerStrip / 2) + @offset) % @config.pixelsPerStrip, @config.colors[1]...
+		@Ledscape.setColor 0, ((@config.pixelsPerStrip / 2) + @offset) % @config.pixelsPerStrip, @config.colors[1]...
 		@Ledscape.draw 0
 
 module.exports = DrawCircle
