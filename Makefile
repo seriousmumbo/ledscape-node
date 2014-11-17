@@ -4,7 +4,7 @@ all: build/Resource/wrapper.node ANIMS ledscape.js BIN_FILES
 
 BIN_FILES: ws281x_0.bin ws281x_1.bin ws2801_0.bin ws2801_1.bin ws2801_newpins_0.bin ws2801_newpins_1.bin
 
-ANIMS: anim/AllFade.js anim/Spinner.js anim/FadeSingle.js anim/FullCircle.js
+ANIMS: anim/AllFade.js anim/Spinner.js anim/FadeSingle.js anim/FullCircle.js anim/DrawCircle.js
 
 build/Resource/wrapper.node: wrapper.cc
 	node-gyp configure build
