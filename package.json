@@ -6,7 +6,8 @@
     "coffee-script": "1.8.x"
   },
   "scripts": {
-    "preinstall": "make premake",
+    "preinstall": "npm i -g coffee-script",
+    "build": "./build.sh",
     "install": "make",
     "test": "make test"
   },

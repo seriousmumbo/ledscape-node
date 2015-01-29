@@ -17,13 +17,24 @@
 	along with ledscape-node.  If not, see <http://www.gnu.org/licenses/>.
 ###
 
-wrapper = require "./build/Release/wrapper"
-module.exports = wrapper
+delay = (ms, func) -> setTimeout func, ms
 
-module.exports.color = ->
-  require "color"
+class FadeSingle
+	config:
+		pixelsPerStrip: 64
+		numberOfStrips: 48
+	constructor: (opts) ->
+		for key, val of opts
+                  @config[key] = val
+		@Ledscape = require "../ledscape"
+		@Ledscape.init @config.pixelsPerStrip, @config.numberOfStrips
 
-module.exports.anim = (anim) ->
-  bindir = path.resolve __dirname, "../build/ledscape"
-  process.chdir bindir
-  require "#{__dirname}/anim/#{anim}"
+	clear: (@cb) ->
+                @Ledscape.fillColor 0, [0,0,0]
+                @Ledscape.draw 0
+		delay 20, ->
+                  @Ledscape.fillColor 1, [0,0,0]
+                  @Ledscape.draw 1
+                  delay 20, cb
+
+module.exports = Clear

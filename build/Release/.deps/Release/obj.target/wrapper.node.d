@@ -1,0 +1,1 @@
+cmd_Release/obj.target/wrapper.node := flock ./Release/linker.lock g++ -shared -pthread -rdynamic  -Wl,-soname=wrapper.node -o Release/obj.target/wrapper.node -Wl,--start-group Release/obj.target/wrapper/wrapper.o -Wl,--end-group ../ledscape/ledscape.o ../ledscape/pru.o ../ledscape/am335x/app_loader/interface/release/prussdrv.o
