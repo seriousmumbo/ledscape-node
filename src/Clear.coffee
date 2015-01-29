@@ -17,6 +17,8 @@
 	along with ledscape-node.  If not, see <http://www.gnu.org/licenses/>.
 ###
 
+delay = (ms, func) -> setTimeout func, ms
+
 class FadeSingle
 	config:
 		pixelsPerStrip: 64
