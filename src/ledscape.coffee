@@ -24,6 +24,7 @@ module.exports.color = ->
   require "color"
 
 module.exports.anim = (anim) ->
-  bindir = path.resolve __dirname, "../build/ledscape"
+  bindir = path.resolve __dirname, "../build"
+  console.log "**** " + bindir + "****"
   process.chdir bindir
   require "#{__dirname}/anim/#{anim}"
