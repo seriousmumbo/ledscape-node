@@ -1,6 +1,6 @@
 {
   "name": "ledscape-node",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "dependencies": {
     "color": "0.7.x",
     "coffee-script": "1.8.x"
