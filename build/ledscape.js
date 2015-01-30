@@ -20,7 +20,9 @@
  */
 
 (function() {
-  var wrapper;
+  var path, wrapper;
+
+  path = require("path");
 
   wrapper = require("./build/Release/wrapper");
 

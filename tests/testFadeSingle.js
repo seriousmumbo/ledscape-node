@@ -17,7 +17,7 @@
 	along with ledscape-node.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-var Ledscape = require("../ledscape");
+var Ledscape = require("../build/ledscape");
 var FadeSingle = Ledscape.anim("FadeSingle");
 var readline = require("readline");
 var rl = readline.createInterface({ input: process.stdin, output: process.stdout });
@@ -28,6 +28,8 @@ var anim = new FadeSingle({});
 
 function fade() {
 	anim.fade(function() {
+          console.log('done');
+          process.exit();
 		if(!stopAtEnd) {
 			fade();
 		}

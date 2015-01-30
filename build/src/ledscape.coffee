@@ -16,7 +16,7 @@
 	You should have received a copy of the GNU General Public License
 	along with ledscape-node.  If not, see <http://www.gnu.org/licenses/>.
 ###
-
+path = require "path"
 wrapper = require "./build/Release/wrapper"
 module.exports = wrapper
 

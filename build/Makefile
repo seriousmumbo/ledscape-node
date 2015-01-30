@@ -39,8 +39,6 @@ anim/DrawCircle.js: src/DrawCircle.coffee
 	mv src/DrawCircle.js anim/
 
 premake:
-	git submodule init
-	git submodule update
 	cp overwrite/interface-makefile ledscape/am335x/app_loader/interface/Makefile
 	cd ledscape/am335x/app_loader/interface/; make
 	cd ledscape/; make
