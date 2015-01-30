@@ -9,5 +9,5 @@
     "build": "./build.sh",
     "test": "make test"
   },
-  "main": "ledscape.js"
+  "main": "build/ledscape.js"
 }
