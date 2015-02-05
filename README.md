@@ -6,20 +6,9 @@ ledscape-node
 If the module is private, use `npm install git+ssh://git@github.com:seriousmumbo/ledscape-node.git`.
 
 Otherwise, use `npm install seriousmumbo/ledscape-node`.
+You can also clone it and run `npm install`.
 
 #### Using preinstalled animations ####
-In CoffeeScript:
-
-```coffee
-ledscape = require "ledscape-node"
-AllFade = ledscape.anim "AllFade"
-allfade = new AllFade
-	duration: 2.0
-allfade.fade ->
-	allfade.fade ->
-		console.log "Faded twice."
-```
-
 In JavaScript:
 
 ```node
@@ -31,16 +20,6 @@ allfade.fade(function() {
 		console.log("Faded twice.");
 	});
 });
-```
-
-#### Creating your own animations ####
-In CoffeeScript:
-
-```coffee
-ledscape = require "ledscape-node"
-ledscape.init pixelsPerStrip, strips
-ledscape.fillColor frame, rgb...
-# Other ledscape.* calls...
 ```
 
 In JavaScript:
@@ -60,7 +39,12 @@ You can download a copy and test it locally.
 	npm install
 	npm test
 
-If running as `root`, use `npm install --unsafe-perm` instead, to confirm with NPM that you are requesting root permissions to make changes to the folder.
+## Building
+
+Building takes quite some time and has extra dependencies so
+the build doesn't happen every time you install.
+
+If you change the code you will need to run `./build.sh`.
 
 ## License ##
 

@@ -17,7 +17,7 @@
 	along with ledscape-node.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-var Ledscape = require("../ledscape");
+var Ledscape = require("../build/ledscape");
 var FullCircle = Ledscape.anim("FullCircle");
 var readline = require("readline");
 var rl = readline.createInterface({ input: process.stdin, output: process.stdout });

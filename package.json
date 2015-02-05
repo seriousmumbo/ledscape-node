@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build": "./build.sh",
-    "test": "make test"
+    "test": "node tests/test.js"
   },
   "main": "build/ledscape.js"
 }
