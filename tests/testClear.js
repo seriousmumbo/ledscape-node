@@ -1,4 +1,4 @@
-###
+/*
 	Copyright 2014 Serious Mumbo, Inc.
 
 	This file is part of ledscape-node.
@@ -15,22 +15,10 @@
 
 	You should have received a copy of the GNU General Public License
 	along with ledscape-node.  If not, see <http://www.gnu.org/licenses/>.
-###
+*/
 
-delay = (ms, func) -> setTimeout func, ms
+var Ledscape = require("../build/ledscape");
+var Clear = Ledscape.anim("Clear");
+var anim = new Clear({});
+anim.clear(function() {});
 
-class Clear
-	config:
-		pixelsPerStrip: 64
-		numberOfStrips: 48
-	constructor: (opts) ->
-		for key, val of opts
-                  @config[key] = val
-		@Ledscape = require "../ledscape"
-		@Ledscape.init @config.pixelsPerStrip, @config.numberOfStrips
-
-	clear: (@cb) ->
-                @Ledscape.fillColor 0, [0,0,0]
-                @Ledscape.draw 0
-
-module.exports = Clear

@@ -29,8 +29,8 @@ extern "C" {
 
 using namespace v8;
 
-unsigned int num_pixels = 64;
-unsigned int num_strips = 48;
+unsigned int num_pixels = 24;
+unsigned int num_strips = 1;
 
 ledscape_t * leds;
 
@@ -194,6 +194,10 @@ void InitAll(Handle<Object> exports, Handle<Object> module) {
      FunctionTemplate::New(LedscapeSetColor)->GetFunction());
    exports->Set(String::NewSymbol("setColorNoWait"),
      FunctionTemplate::New(LedscapeSetColorNoWait)->GetFunction());
+   exports->Set(String::NewSymbol("setColorStrip"),
+     FunctionTemplate::New(LedscapeSetColorStrip)->GetFunction());
+   exports->Set(String::NewSymbol("setColorStripNoWait"),
+     FunctionTemplate::New(LedscapeSetColorStripNoWait)->GetFunction());
    exports->Set(String::NewSymbol("close"),
      FunctionTemplate::New(LedscapeClose)->GetFunction());
 }

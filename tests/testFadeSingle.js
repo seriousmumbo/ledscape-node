@@ -22,22 +22,7 @@ var FadeSingle = Ledscape.anim("FadeSingle");
 var readline = require("readline");
 var rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
-var stopAtEnd = false;
-
 var anim = new FadeSingle({});
 
-function fade() {
-	anim.fade(function() {
-          console.log('done');
-          process.exit();
-		if(!stopAtEnd) {
-			fade();
-		}
-	});
-}
+anim.fade(function() {});
 
-fade();
-
-rl.question("Use [Enter] to stop the animation at the next endpoint.", function(ok) {
-	stopAtEnd = true;
-});
