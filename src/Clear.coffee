@@ -19,7 +19,7 @@
 
 delay = (ms, func) -> setTimeout func, ms
 
-class FadeSingle
+class Clear
 	config:
 		pixelsPerStrip: 64
 		numberOfStrips: 48
@@ -32,9 +32,5 @@ class FadeSingle
 	clear: (@cb) ->
                 @Ledscape.fillColor 0, [0,0,0]
                 @Ledscape.draw 0
-		delay 20, ->
-                  @Ledscape.fillColor 1, [0,0,0]
-                  @Ledscape.draw 1
-                  delay 20, cb
 
 module.exports = Clear
