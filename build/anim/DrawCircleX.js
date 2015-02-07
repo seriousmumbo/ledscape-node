@@ -18,12 +18,30 @@
 
     function DrawCircleX(opts) {
       this.draw = __bind(this.draw, this);
+      var c, i, _i, _len, _ref;
       DrawCircleX.__super__.constructor.call(this, opts);
+      this.offset = 0;
+      this.colors = 'lime maroon navy olive orange blue yellow green aqua fuchsia ' + 'salmon seashell red';
+      this.colors = this.colors.split(' ');
+      _ref = this.colors;
+      for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+        c = _ref[i];
+        this.colors[i] = color(c);
+      }
     }
 
     DrawCircleX.prototype.draw = function(elapsed) {
-      this.fill(color("green"));
-      return this.pixel(10, color("red"));
+      var i, n, _i, _ref;
+      this.fill(color('black'));
+      n = this.offset % 24;
+      for (i = _i = 0, _ref = this.colors.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+        this.pixel(n, this.colors[i]);
+        n += 1;
+        if (n === 24) {
+          n = 0;
+        }
+      }
+      return this.offset += 1;
     };
 
     return DrawCircleX;

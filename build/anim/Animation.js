@@ -11,10 +11,10 @@
 
   Animation = (function() {
     Animation.prototype.config = {
-      fps: 100,
+      fps: 30,
       duration: 20,
       repeat: false,
-      brightness: 0.4
+      brightness: 0.2
     };
 
     function Animation(opts) {
@@ -48,6 +48,7 @@
     Animation.prototype.play = function(_at_cb) {
       this.cb = _at_cb;
       this.frame = 0;
+      this.fill(color("black"));
       return this.go();
     };
 
@@ -88,7 +89,10 @@
           this.dirty[this.frame][p] = false;
         }
       }
-      clr = this.pixels[numpixels - 1].rgb();
+      clr = this.pixels[numpixels - 1].clone().rgb();
+      clr.r = Math.round(clr.b * this.config.brightness);
+      clr.g = Math.round(clr.b * this.config.brightness);
+      clr.b = Math.round(clr.b * this.config.brightness);
       ledscape.setColor(this.frame, numpixels - 1, clr.r, clr.g, clr.b);
       ledscape.draw(this.frame);
       if (this.frame === 0) {

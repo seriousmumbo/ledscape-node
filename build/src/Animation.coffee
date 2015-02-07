@@ -6,10 +6,10 @@ numpixels = 24
 
 class Animation
   config:
-    fps: 100
+    fps: 30
     duration: 20
     repeat: false
-    brightness: 0.4
+    brightness: 0.2
 
   constructor: (opts) ->
     @dirty = [[],[] ]
@@ -25,6 +25,7 @@ class Animation
  
   play: (@cb) =>
     @frame = 0
+    @fill color("black")
     @go()
 
   go: =>
@@ -53,7 +54,10 @@ class Animation
       if @dirty[@frame][p]
         ledscape.setColorNoWait @frame, p, rgb.r, rgb.g, rgb.b
         @dirty[@frame][p] = false
-    clr = @pixels[numpixels-1].rgb()
+    clr = @pixels[numpixels-1].clone().rgb()
+    clr.r = Math.round(clr.b*@config.brightness)
+    clr.g = Math.round(clr.b*@config.brightness)
+    clr.b = Math.round(clr.b*@config.brightness)
     ledscape.setColor @frame, numpixels-1, clr.r, clr.g, clr.b
     ledscape.draw @frame
     if @frame is 0 then @frame = 1 else @frame = 0
