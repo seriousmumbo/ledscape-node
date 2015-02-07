@@ -1,3 +1,4 @@
-var DrawCircleX = require('../ledscape').DrawCircleX
+var DrawCircleX = require('../build/ledscape').DrawCircleX;
 
-new DrawCircleX().play();
+console.log(require('../build/ledscape'));
+//new DrawCircleX().play();
