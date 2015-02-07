@@ -1,45 +1,15 @@
-###
-	Copyright 2014 Serious Mumbo, Inc.
+Animation = require './Animation'
+color = require 'color'
 
-	This file is part of ledscape-node.
-
-	ledscape-node is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
-
-	ledscape-node is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	You should have received a copy of the GNU General Public License
-	along with ledscape-node.  If not, see <http://www.gnu.org/licenses/>.
-###
-
-class DrawCircleX
+class DrawCircleX extends Animation
 	config:
-		pixelsPerStrip: 64
-		numberOfStrips: 48
 		duration: 10
-		colors: [[255,0,0],[128,0,0]]
-		startColor: [0,0,0]
-		brightness: 0.75
+
 	constructor: (opts) ->
-		for key, val of opts
-			@config[key] = val
-		@Ledscape = require "../ledscape"
-		@Ledscape.init @config.pixelsPerStrip, @config.numberOfStrips
-	rotate: ->
-		@offset = 0
-		@interval = Math.round 1000/@config.pixelsPerStrip
-		@Ledscape.fillColorNoWait 0, @config.startColor
-		@timer = setInterval @draw, @interval
-		@draw()
-	draw: =>
-		@offset++
-		@Ledscape.setColorNoWait 0, @offset % @config.pixelsPerStrip, 0,100,0
-		@Ledscape.setColor 0, 20 , 128,0,0
-		@Ledscape.draw 0
+    super opts
+
+	draw: (elapsed) =>
+    @fill color("green")
+    @pixel 10, color("red")
 
 module.exports = DrawCircleX

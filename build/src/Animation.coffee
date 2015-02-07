@@ -39,12 +39,12 @@ class Animation
     @fill color("black")
     @ledsOut()
 
-  ledsOut:
+  ledsOut: =>
     for p in [0..numpixels-2]
-      color = @pixels[p].rgb()
-      ledscape.setColorNoWait @frame, p, color.r, color.g, color.b
-    last = @pixels[numpixels-1].rgb()
-    ledscape.setColor @frame, numpixels-1, last.r, last.g, last.b
+      rgb = @pixels[p].rgb()
+      ledscape.setColorNoWait @frame, p, rgb.r, rgb.g, rgb.b
+    clr = @pixels[numpixels-1].rgb()
+    ledscape.setColor @frame, numpixels-1, clr.r, clr.g, clr.b
     ledscape.draw @frame
     if @frame is 0 then @frame = 1 else @frame = 0
 

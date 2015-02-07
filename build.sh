@@ -12,5 +12,6 @@ export NPMBIN=$(npm bin)
 cd build
 make premake
 make
+coffee -c src/*.coffee -o anim
 cd ..
 
