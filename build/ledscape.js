@@ -25,12 +25,14 @@
     outfuncs[k] = v;
   }
 
+  module.exports = outfuncs;
+
   files = glob.sync("anim/*.js", {});
 
   for (_i = 0, _len = files.length; _i < _len; _i++) {
     file = files[_i];
     tokens = file.split('/');
-    name = tokens[0];
+    name = tokens[1].substr(0, tokens[1].length - 3);
     outfuncs[name] = require(bindir + '/' + file);
   }
 

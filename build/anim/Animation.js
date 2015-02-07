@@ -5,6 +5,8 @@
 
   ledscape = require("../ledscape");
 
+  console.log(ledscape);
+
   color = require("color");
 
   numpixels = 24;
@@ -28,7 +30,13 @@
       this.checkDone = __bind(this.checkDone, this);
       this.go = __bind(this.go, this);
       this.play = __bind(this.play, this);
-      var key, val;
+      var f, key, p, val, _i, _j;
+      this.dirty = [[], []];
+      for (f = _i = 0; _i <= 1; f = ++_i) {
+        for (p = _j = 0; 0 <= numpixels ? _j <= numpixels : _j >= numpixels; p = 0 <= numpixels ? ++_j : --_j) {
+          this.dirty[f].push(true);
+        }
+      }
       for (key in opts) {
         val = opts[key];
         this.config[key] = val;
@@ -53,16 +61,23 @@
 
     Animation.prototype.checkDone = function() {
       if (this.config.repeat) {
-        return this.play();
+        this.play();
+        return true;
       } else {
         clearInterval(this.timer);
         this.clear();
-        return this.cb();
+        setTimeout(((function(_this) {
+          return function() {
+            return typeof _this.cb === "function" ? _this.cb() : void 0;
+          };
+        })(this)), 100);
+        return false;
       }
     };
 
     Animation.prototype.clear = function() {
       this.fill(color("black"));
+      this.ledsOut();
       return this.ledsOut();
     };
 
@@ -70,7 +85,10 @@
       var clr, p, rgb, _i, _ref;
       for (p = _i = 0, _ref = numpixels - 2; 0 <= _ref ? _i <= _ref : _i >= _ref; p = 0 <= _ref ? ++_i : --_i) {
         rgb = this.pixels[p].rgb();
-        ledscape.setColorNoWait(this.frame, p, rgb.r, rgb.g, rgb.b);
+        if (this.dirty[this.frame][p]) {
+          ledscape.setColorNoWait(this.frame, p, rgb.r, rgb.g, rgb.b);
+          this.dirty[this.frame][p] = false;
+        }
       }
       clr = this.pixels[numpixels - 1].rgb();
       ledscape.setColor(this.frame, numpixels - 1, clr.r, clr.g, clr.b);
@@ -83,13 +101,17 @@
     };
 
     Animation.prototype.drawFrame = function() {
-      var elapsed;
+      var dodraw, elapsed;
       elapsed = new Date().getTime() - this.start;
       if (elapsed >= this.done) {
-        this.checkDone();
+        dodraw = this.checkDone();
+      } else {
+        dodraw = true;
       }
-      this.draw(elapsed);
-      return this.ledsOut();
+      if (dodraw) {
+        this.draw(elapsed);
+        return this.ledsOut();
+      }
     };
 
     Animation.prototype.pause = function() {
@@ -101,14 +123,16 @@
     };
 
     Animation.prototype.pixel = function(n, color) {
-      return this.pixels[n] = color;
+      this.pixels[n] = color;
+      this.dirty[0][n] = true;
+      return this.dirty[1][n] = true;
     };
 
     Animation.prototype.fill = function(color) {
       var p, _i, _ref, _results;
       _results = [];
       for (p = _i = 0, _ref = numpixels - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; p = 0 <= _ref ? ++_i : --_i) {
-        _results.push(this.pixel(n, color));
+        _results.push(this.pixel(p, color));
       }
       return _results;
     };

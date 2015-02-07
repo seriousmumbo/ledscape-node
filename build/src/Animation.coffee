@@ -1,4 +1,6 @@
 ledscape = require "../ledscape"
+console.log ledscape
+
 color = require "color"
 
 numpixels = 24
@@ -11,6 +13,10 @@ class Animation
     brightness: 0.4
 
   constructor: (opts) ->
+    @dirty = [[],[] ]
+    for f in [0..1]
+      for p in [0..numpixels]
+        @dirty[f].push true
     for key, val of opts
       @config[key] = val
     @frame = 0
@@ -30,19 +36,24 @@ class Animation
   checkDone: =>
     if @config.repeat
       @play()
+      return true
     else
       clearInterval @timer
       @clear()
-      @cb()
+      setTimeout ( => @cb?() ), 100
+      return false
 
   clear: =>
     @fill color("black")
+    @ledsOut()
     @ledsOut()
 
   ledsOut: =>
     for p in [0..numpixels-2]
       rgb = @pixels[p].rgb()
-      ledscape.setColorNoWait @frame, p, rgb.r, rgb.g, rgb.b
+      if @dirty[@frame][p]
+        ledscape.setColorNoWait @frame, p, rgb.r, rgb.g, rgb.b
+        @dirty[@frame][p] = false
     clr = @pixels[numpixels-1].rgb()
     ledscape.setColor @frame, numpixels-1, clr.r, clr.g, clr.b
     ledscape.draw @frame
@@ -51,9 +62,12 @@ class Animation
   drawFrame: =>
     elapsed = new Date().getTime()-@start
     if elapsed >= @done
-      @checkDone()
-    @draw elapsed
-    @ledsOut()
+      dodraw = @checkDone()
+    else
+      dodraw = true
+    if dodraw
+      @draw elapsed
+      @ledsOut()
 
   pause: =>
     clearInterval @timer
@@ -63,10 +77,11 @@ class Animation
 
   pixel: (n, color) =>
     @pixels[n] = color
- 
+    @dirty[0][n] = true
+    @dirty[1][n] = true
+
   fill: (color) =>
     for p in [0..numpixels-1]
-      @pixel n, color
-
+      @pixel p, color
 
 module.exports = Animation
