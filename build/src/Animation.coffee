@@ -1,5 +1,4 @@
 ledscape = require "../ledscape"
-console.log ledscape
 
 color = require "color"
 
