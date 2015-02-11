@@ -1,12 +1,15 @@
 var ledscape = require('../../ledscape');
 
 ledscape.addData({
-  earth: { orbit: { start: 2, pos:2, rps: 0.5 }, 
+  earth: { orbit: { pos: 2, rps: 0.5 }, 
            render: { color: 'blue' },
            controls: { state: 'running'}  },
-  venus: { orbit: { start: 4, pos:4, rps: 1.0 },
+  venus: { orbit: { pos: 14, rps: 1.0 },
            controls: { state: 'running' },
            render: { color: 'lightyellow'} },
+  orange:{ orbit: { pos: 8, rps: 0.7 },
+           controls: { state: 'running' },
+           render: { color: 'orange' } }
 });
 
 var data = ledscape.data;

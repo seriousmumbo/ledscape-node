@@ -62,6 +62,14 @@ var coreSystems = {
   clear: clear
 }
 
+clearAll = function() {
+  for (var i=0; i<23; i++) {
+    ledscape.setColorNoWait(0, i, 0, 0, 0);
+  }
+  ledscape.setColor(0,23,0,0,0);
+  ledscape.draw(0);
+}
+
 var gameloop = require('node-gameloop');
 
 function runSystem(set, system) {
@@ -87,6 +95,7 @@ exports.startLoop = function() {
 
 exports.stopLoop = function() {
   gameloop.clearGameLoop(process.loopid);
+  clearAll();
 }
 
 exports.data = data;
