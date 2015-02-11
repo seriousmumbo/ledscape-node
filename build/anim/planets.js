@@ -16,14 +16,14 @@ ledscape.addData({
 setState = function(state) {
   for (var p=0; p<3; p++) {
     var planet = ['earth','venus','orange'][p];
-    ledscape.data[planet].controls.state = state;
+    ledscape[state](planet);
   }
 }
 
 exports.pause = function() {
-  setState('paused');
+  setState('pause');
 }
 
 exports.start = function() {
-  setState('running');
+  setState('play');
 }

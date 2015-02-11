@@ -4,10 +4,6 @@ var data = ledscape.data;
 
 ledscape.addSystems({
   orbit: function(obj) {
-    if ('controls' in obj && 
-        obj.controls.state != 'running') {
-      return;
-    }
     var delta = data.frames.delta;
     obj.orbit.pos += delta * obj.orbit.rps * 24;
     if (obj.orbit.pos > data.pixels.numpixels) {

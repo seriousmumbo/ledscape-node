@@ -45,9 +45,9 @@ var coreSystems = {
     entity.leds.map(function(pixel, i) {
       if (! 'rgb' in pixel) pixel = color('black');
       var c = pixel.clone().rgb();
-      c.r = Math.round(c.r*0.05);
-      c.g = Math.round(c.g*0.05);
-      c.b = Math.round(c.b*0.05);
+      c.r = Math.round(c.r*0.25);
+      c.g = Math.round(c.g*0.25);
+      c.b = Math.round(c.b*0.25);
       if (i < entity.leds.length-1) {
         ledscape.setColorNoWait(framenum, i, c.r, c.g, c.b);
       } else {
@@ -77,12 +77,18 @@ function runSystem(set, system) {
   Object.keys(data).filter(function(name) {
     return (system in data[name]);
   }).map(function(name) {
-    func(data[name]);
+    var hasControls = ('controls' in data[name]);
+    if (!hasControls || (hasControls 
+        && data[name].controls.state === 'running') {
+      func(data[name]);
+    }
   });
 }
 
 exports.startLoop = function() {
+  var start = new Date().getTime();
   process.loopid = gameloop.setGameLoop(function(delta) {
+    data.frames.elapsed = new Date().getTime() - start;
     data.frames.delta = delta;
     Object.keys(systems).map(function(name) {
       runSystem(systems, name);  

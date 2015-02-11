@@ -52,6 +52,34 @@ outfuncs.addSystems = function(addSystem) {
   }
 }
 
+
+setState = function(obj, state) {
+  if (!('controls' in data[planet])) {
+    data[obj].controls = { state: state };
+  } else {
+    data[obj].controls.state = state;
+  }
+}
+
+outfuncs.fill = function(clr) {
+  data.ringPixels = [];
+  for (var i=0; i<24; i++ ) {
+    data.ringPixels.push({render: {pos:i, color:clr}});
+  }
+}
+
+outfuncs.play = function(obj) {
+  setState(obj, 'running');
+}
+
+outfuncs.pause = function(obj) {
+  setState(obj, 'paused');
+}
+
+outfuncs.stop = function(obj) {
+  setState(obj, 'stopped');
+}
+
 outfuncs.startLoop = function() {
   system.startLoop();
 }
