@@ -1,7 +1,7 @@
 var ledscape = require('../../ledscape');
 var color = require('color');
 
-var entities = ['earth', 'venus', 'pixels', 'frames'];
+var entities = ['earth', 'venus', 'pixels', 'frames', 'frameswap'];
 var blackLeds = new Array();
 for (var l =0; l<24; l++) {
   blackLeds.push(color('black'));
@@ -16,7 +16,8 @@ var data = {
            controls: { state: 'running'}  },
   venus: { orbit: { start: 4, speed: 200.0 },
            controls: { state: 'running' },
-           render: { color: 'lightyellow', pos: 4} }
+           render: { color: 'lightyellow', pos: 4} },
+  frameswap: { swap: { doswap: true}  }
 };
 
 var systems = {
@@ -34,28 +35,41 @@ var systems = {
   },
   render: function(entity) {
     data.pixels.leds[entity.render.pos] = color(entity.render.color);
+    
   },
   controls: function(entity) {
     return;  
-  },
+  }
+}
+
+var coreSystems = {
   leds: function(entity) {
-    return;
     entity.leds.map(function(pixel, i) {
       if (! 'rgb' in pixel) pixel = color('black');
       var c = pixel.rgb();
       if (i < entity.leds.length-1) {
+        console.log('frame='+ledscape.framenum+' p='+i+
+                    ' rgb = '+c.r+','+c.g+','+c.b);
         ledscape.setColorNoWait(ledscape.framenum, i, c.r, c.g, c.b);
       } else {
+        console.log('setcolor (wait) frame='+ledscape.framenum+' p='+i+
+                    ' rgb = '+c.r+','+c.g+','+c.b);
         ledscape.setColor(ledscape.framenum, i, c.r, c.g, c.b);
+        console.log('setcolor returned');
       }
     });
+  },
+  swap: function(entity) {
+    ledscape.draw(ledscape.framenum);
+    ledscape.swapFrames();
   }
 }
 
 //var gameloop = require('node-gameloop');
 
-function runSystem(system) {
-  var func = systems[system];
+function runSystem(set, system) {
+  var func = set[system];
+  console.log('runSystem ' + system);
   Object.keys(data).filter(function(name) {
     return (system in data[name]);
   }).map(function(name) {
@@ -63,19 +77,31 @@ function runSystem(system) {
   });
 }
 
-//process.loopid = gameloop.setGameLoop(function(delta) {
 var start = new Date().getTime();
 
+var prev = start;
+
 setInterval(function() {
-  var delta = new Date().getTime()-start; 
+  var current = new Date().getTime();
+  var elapsed = current - start;
+  var delta = elapsed - prev;
+  prev = current; 
+  console.log('top of loop');
+  delta = 0.3;
   Object.keys(systems).map(function(name) {
     data.frames.delta = delta;
-    console.log('delta='+delta, 'runsystem '+name);
-    runSystem(name);  
+    runSystem(systems, name);  
   });
-  //setTimeout(function() {
-    //gameloop.clearGameLoop(process.loopid);
-  //  process.exit();
-  //}, 10000);
-},1000.0/30.0);
+  Object.keys(coreSystems).map(function(name) {
+    data.frames.delta = delta;
+    runSystem(coreSystem, name);
+  });
+}, 1000.0/30.0);
+
+//setTimeout(function() {
+//  console.log('finishing');
+//  gameloop.clearGameLoop(process.loopid);
+//  process.exit();
+//}, 5000);
+
 

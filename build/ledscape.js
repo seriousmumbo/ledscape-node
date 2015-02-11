@@ -30,6 +30,16 @@ Object.keys(wrapper).map(function(k) {
   outfuncs[k] = wrapper[k];
 });
 
+outfuncs.framenum = 0;
+
+outfuncs.swapFrames = function() {
+  if (outfuncs.framenum === 0) {
+    outfuncs.framenum = 1;
+  } else { 
+    outfuncs.framenum = 0;
+  }
+}
+
 module.exports = outfuncs;
 
 files = glob.sync("anim/*.js", {});
