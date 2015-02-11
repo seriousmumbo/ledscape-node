@@ -70,4 +70,6 @@ files.map(function(file) {
   outfuncs[name] = require(bindir+'/'+file);
 });
 
+system.startLoop();
+
 module.exports = outfuncs;
