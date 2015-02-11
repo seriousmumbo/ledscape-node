@@ -63,12 +63,16 @@ var coreSystems = {
 }
 
 clearAll = function() {
-  for (var i=0; i<23; i++) {
-    ledscape.setColorNoWait(0, i, 0, 0, 0);
+  for (var f=0; f<2; f++) {
+    for (var i=0; i<23; i++) {
+      ledscape.setColorNoWait(f, i, 0, 0, 0);
+    }
+    ledscape.setColor(f,23,0,0,0);
+    ledscape.draw(f);
   }
-  ledscape.setColor(0,23,0,0,0);
-  ledscape.draw(0);
 }
+
+exports.clearAll = clearAll;
 
 var gameloop = require('node-gameloop');
 
@@ -79,7 +83,7 @@ function runSystem(set, system) {
   }).map(function(name) {
     var hasControls = ('controls' in data[name]);
     if (!hasControls || (hasControls 
-        && data[name].controls.state === 'running') {
+        && data[name].controls.state === 'running')) {
       func(data[name]);
     }
   });
@@ -88,7 +92,7 @@ function runSystem(set, system) {
 exports.startLoop = function() {
   var start = new Date().getTime();
   process.loopid = gameloop.setGameLoop(function(delta) {
-    data.frames.elapsed = new Date().getTime() - start;
+    data.frames.elapsed = (new Date().getTime() - start) / 1000.0;
     data.frames.delta = delta;
     Object.keys(systems).map(function(name) {
       runSystem(systems, name);  
@@ -101,7 +105,7 @@ exports.startLoop = function() {
 
 exports.stopLoop = function() {
   gameloop.clearGameLoop(process.loopid);
-  clearAll();
+  setTimeout(clearAll, 500);
 }
 
 exports.data = data;

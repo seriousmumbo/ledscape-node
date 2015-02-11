@@ -52,9 +52,8 @@ outfuncs.addSystems = function(addSystem) {
   }
 }
 
-
 setState = function(obj, state) {
-  if (!('controls' in data[planet])) {
+  if (!('controls' in data[obj])) {
     data[obj].controls = { state: state };
   } else {
     data[obj].controls.state = state;
@@ -62,22 +61,27 @@ setState = function(obj, state) {
 }
 
 outfuncs.fill = function(clr) {
-  data.ringPixels = [];
   for (var i=0; i<24; i++ ) {
-    data.ringPixels.push({render: {pos:i, color:clr}});
+    data['p'+i] = {render: {pos:i, color:clr}};
   }
 }
 
 outfuncs.play = function(obj) {
+  outfuncs.fill(color('black'));
+  system.clearAll();
   setState(obj, 'running');
 }
 
 outfuncs.pause = function(obj) {
   setState(obj, 'paused');
+  outfuncs.fill(color('black'));
+  system.clearAll();
 }
 
 outfuncs.stop = function(obj) {
   setState(obj, 'stopped');
+  outfuncs.fill(color('black'));
+  system.clearAll();
 }
 
 outfuncs.startLoop = function() {
@@ -88,8 +92,13 @@ outfuncs.stopLoop = function() {
   system.stopLoop();
 }
 
+outfuncs.anim = function(name) {
+  return require(bindir+'/anim/'+name);
+}
+
 module.exports = outfuncs;
 
+/*
 files = glob.sync("anim/*.js", {});
 
 files.map(function(file) {
@@ -97,6 +106,9 @@ files.map(function(file) {
   var name = tokens[1].substr(0, tokens[1].length-3);
   outfuncs[name] = require(bindir+'/'+file);
 });
+*/
+
+
 
 system.startLoop();
 

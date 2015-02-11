@@ -13,7 +13,7 @@ ledscape.addData({
            render: { color: 'orange' } }
 });
 
-setState = function(state) {
+planetSetState = function(state) {
   for (var p=0; p<3; p++) {
     var planet = ['earth','venus','orange'][p];
     ledscape[state](planet);
@@ -21,9 +21,9 @@ setState = function(state) {
 }
 
 exports.pause = function() {
-  setState('pause');
+  planetSetState('pause');
 }
 
 exports.start = function() {
-  setState('play');
+  planetSetState('play');
 }

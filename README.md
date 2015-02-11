@@ -9,26 +9,20 @@ Otherwise, use `npm install seriousmumbo/ledscape-node`.
 You can also clone it and run `npm install`.
 
 #### Using preinstalled animations ####
-In JavaScript:
 
-```node
+```javascript
 var ledscape = require("ledscape-node");
-var AllFade = ledscape.anim("AllFade");
-var allfade = new AllFade({duration: 2.0});
-allfade.fade(function() {
-	allfade.fade(function() {
-		console.log("Faded twice.");
-	});
-});
-```
 
-In JavaScript:
+ledscape.anim('fadesingle');
+ledscape.play('ring');
 
-```node
-var ledscape = require("ledscape-node")
-ledscape.init(pixelsPerStrip, strips);
-ledscape.fillColor(frame, rgb[0], rgb[1], rgb[2]);
-// Other ledscape.* calls...
+setTimeout(function() {
+  ledscape.stop('ring');
+  ledscape.anim('planets').start();
+}, 3000);
+
+setTimeout(ledscape.stopLoop, 10000);
+
 ```
 
 ## Testing ##
