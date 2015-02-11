@@ -1,6 +1,7 @@
 var path = require("path");
 var wrapper = require("./build/Release/wrapper");
 var glob = require("glob");
+var color = require("color");
 
 var pixels = 64;
 var strips = 48;
@@ -37,6 +38,14 @@ outfuncs.swapFrames = function() {
     outfuncs.framenum = 1;
   } else { 
     outfuncs.framenum = 0;
+  }
+}
+
+outfuncs.clear = function(entity) {
+  if (entity.clear === true) {
+    for (var i=0; i<entity.leds.length; i++) {
+      entity.leds[i] = color('black');
+    }
   }
 }
 
