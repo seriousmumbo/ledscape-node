@@ -74,8 +74,6 @@ clearAll = function() {
 
 exports.clearAll = clearAll;
 
-var gameloop = require('node-gameloop');
-
 function runSystem(set, system) {
   var func = set[system];
   Object.keys(data).filter(function(name) {
@@ -89,11 +87,17 @@ function runSystem(set, system) {
   });
 }
 
+var start = new Date().getTime();
+var prev = start;
 exports.startLoop = function() {
   var start = new Date().getTime();
-  process.loopid = gameloop.setGameLoop(function(delta) {
-    data.frames.elapsed = (new Date().getTime() - start) / 1000.0;
+  var prev = start;
+  setInterval(function() {
+    var current = new Date().getTime();
+    data.frames.elapsed = (current - start) / 1000.0;
+    delta = (current - prev) / 1000.0;
     data.frames.delta = delta;
+    prev = current;
     Object.keys(systems).map(function(name) {
       runSystem(systems, name);  
     });
@@ -104,7 +108,6 @@ exports.startLoop = function() {
 }
 
 exports.stopLoop = function() {
-  gameloop.clearGameLoop(process.loopid);
   setTimeout(clearAll, 500);
 }
 
