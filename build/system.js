@@ -87,12 +87,13 @@ function runSystem(set, system) {
   });
 }
 
+var int = null;
 var start = new Date().getTime();
 var prev = start;
 exports.startLoop = function() {
   var start = new Date().getTime();
   var prev = start;
-  setInterval(function() {
+  int = setInterval(function() {
     var current = new Date().getTime();
     data.frames.elapsed = (current - start) / 1000.0;
     delta = (current - prev) / 1000.0;
@@ -108,7 +109,10 @@ exports.startLoop = function() {
 }
 
 exports.stopLoop = function() {
-  setTimeout(clearAll, 500);
+  clearInterval(int);
+  setTimeout(function() {
+    clearAll();
+  }, 500);
 }
 
 exports.data = data;
