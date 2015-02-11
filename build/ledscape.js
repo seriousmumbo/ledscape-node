@@ -33,20 +33,31 @@ Object.keys(wrapper).map(function(k) {
 
 outfuncs.framenum = 0;
 
-outfuncs.swapFrames = function() {
-  if (outfuncs.framenum === 0) {
-    outfuncs.framenum = 1;
-  } else { 
-    outfuncs.framenum = 0;
+system = require('./system.js');
+data = system.data;
+systems = system.systems;
+outfuncs.data = data;
+outfuncs.systems = systems;
+outfuncs.coreSystems = system.coreSystems;
+
+outfuncs.addData = function(addData) {
+  for (var k in addData) {
+    data[k] = addData[k];
   }
 }
 
-outfuncs.clear = function(entity) {
-  if (entity.clear === true) {
-    for (var i=0; i<entity.leds.length; i++) {
-      entity.leds[i] = color('black');
-    }
+outfuncs.addSystems = function(addSystem) {
+  for (var k in addSystem) {
+    systems[k] = addSystem[k];
   }
+}
+
+outfuncs.startLoop = function() {
+  system.startLoop();
+}
+
+outfuncs.stopLoop = function() {
+  system.stopLoop();
 }
 
 module.exports = outfuncs;
