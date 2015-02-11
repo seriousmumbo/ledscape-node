@@ -15,3 +15,15 @@ ledscape.addSystems({
     ledscape.fill(ring.fade.color.clone().darken(ratio));
   }
 });
+
+exports.start = function() {
+  ledscape.play('ring');
+}
+
+exports.pause = function() {
+  ledscape.pause('ring');
+}
+
+exports.stop = function() {
+  ledscape.stop('ring');
+}
