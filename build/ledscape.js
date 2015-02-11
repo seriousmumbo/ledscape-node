@@ -98,18 +98,10 @@ outfuncs.anim = function(name) {
 
 module.exports = outfuncs;
 
-/*
-files = glob.sync("anim/*.js", {});
-
-files.map(function(file) {
-  var tokens = file.split('/');
-  var name = tokens[1].substr(0, tokens[1].length-3);
-  outfuncs[name] = require(bindir+'/'+file);
-});
-*/
-
-
-
 system.startLoop();
+
+outfuncs.anim('fadesingle');
+outfuncs.play('ring');
+outfuncs.stop('ring');
 
 module.exports = outfuncs;
