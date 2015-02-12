@@ -3,5 +3,5 @@ var ledscape = require("../build/ledscape");
 ledscape.anim('fadesingle');
 ledscape.play('ring');
 
-setTimeout(ledscape.stopLoop, 10000);
+setTimeout(ledscape.stopLoop, 20000);
 
