@@ -27,3 +27,7 @@ exports.pause = function() {
 exports.start = function() {
   planetSetState('play');
 }
+
+exports.stop = function() {
+  planetSetState('stop');
+}
