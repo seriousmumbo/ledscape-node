@@ -45,9 +45,9 @@ var coreSystems = {
     entity.leds.map(function(pixel, i) {
       if (! 'rgb' in pixel) pixel = color('black');
       var c = pixel.clone().rgb();
-      c.r = Math.round(c.r*0.25);
-      c.g = Math.round(c.g*0.25);
-      c.b = Math.round(c.b*0.25);
+      c.r = Math.round(c.r*0.12);
+      c.g = Math.round(c.g*0.12);
+      c.b = Math.round(c.b*0.12);
       if (i < entity.leds.length-1) {
         ledscape.setColorNoWait(framenum, i, c.r, c.g, c.b);
       } else {
