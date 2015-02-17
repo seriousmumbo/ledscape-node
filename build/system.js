@@ -1,57 +1,55 @@
 var ledscape = require('./build/Release/wrapper');
-var color = require('color');
+
+var BLACK = [0,0,0];
 
 var blackLeds = new Array();
 for (var l =0; l<24; l++) {
-  blackLeds.push(color('black'));
+  blackLeds.push(BLACK);
 }
 var data = {
   pixels: { numpixels: 24,
-            leds: blackLeds,
-            clear: true },
+            leds: blackLeds},
   frames: { framenum: 0,
             numframes: 30 },
   frameswap: { swap: { doswap: true}  }
 };
+
 
 var framenum = 0;
 
 var systems = {};
 
 swapFrames = function() {
-  if (outfuncs.framenum === 0) {
-    outfuncs.framenum = 1;
+  if (framenum === 0) {
+    framenum = 1;
   } else { 
-    outfuncs.framenum = 0;
+    framenum = 0;
   }
 }
 
 clear = function(entity) {
+  return;
   if (entity.clear === true) {
     for (var i=0; i<entity.leds.length; i++) {       
-      entity.leds[i] = color('black');    
+      entity.leds[i] = BLACK;    
     }
   }
 }
 
 var coreSystems = {
   render: function(entity) {
-    data.pixels.leds[entity.render.pos] = color(entity.render.color);
+    data.pixels.leds[entity.render.pos] = entity.render.color;
   },
   controls: function(entity) {
     return;  
   },
   leds: function(entity) {
-    entity.leds.map(function(pixel, i) {
-      if (! 'rgb' in pixel) pixel = color('black');
-      var c = pixel.clone().rgb();
-      c.r = Math.round(c.r*0.12);
-      c.g = Math.round(c.g*0.12);
-      c.b = Math.round(c.b*0.12);
+    entity.leds.map(function(c, i) {
       if (i < entity.leds.length-1) {
-        ledscape.setColorNoWait(framenum, i, c.r, c.g, c.b);
+        if (!c) { console.log('not c'); c = BLACK; }
+       ledscape.setColorNoWait(framenum, i, c[0]*.12, c[1]*.12, c[2]*.12);
       } else {
-        ledscape.setColor(framenum, i, c.r, c.g, c.b);
+        ledscape.setColor(framenum, i, c[0]*.12, c[1]*.12, c[2]*.12);
       }
     });
   },
@@ -76,39 +74,50 @@ exports.clearAll = clearAll;
 
 function runSystem(set, system) {
   var func = set[system];
-  Object.keys(data).filter(function(name) {
-    return (system in data[name]);
-  }).map(function(name) {
-    var hasControls = ('controls' in data[name]);
-    if (!hasControls || (hasControls 
-        && data[name].controls.state === 'running')) {
-      func(data[name]);
+  var keys = Object.keys(data);
+  var keyslen = keys.length;
+  for (var i=0; i<keyslen; i++) {
+    if (system in data[keys[i]]) {
+      
+      func(data[keys[i]]);
+    } else {
     }
-  });
+  }
 }
 
 var int = null;
 var start = new Date().getTime();
 var prev = start;
+var numframes = 0;
+
 exports.startLoop = function() {
+  numframes = 0;
   var start = new Date().getTime();
   var prev = start;
-  int = setInterval(function() {
+ int = setInterval(function() {
+    numframes++;
+    var syskeys = Object.keys(systems);
+    var syskeyslen = syskeys.length;
+    var coresyskeys = Object.keys(coreSystems);
+    var coresyskeyslen = coresyskeys.length;
     var current = new Date().getTime();
     data.frames.elapsed = (current - start) / 1000.0;
     delta = (current - prev) / 1000.0;
     data.frames.delta = delta;
     prev = current;
-    Object.keys(systems).map(function(name) {
-      runSystem(systems, name);  
-    });
-    Object.keys(coreSystems).map(function(name) {
-      runSystem(coreSystems, name);
-    });
+    for (var n=0; n<syskeyslen; n++) {
+      runSystem(systems, syskeys[n]);  
+    }
+    for (var n=0; n<coresyskeyslen; n++) {
+      runSystem(coreSystems, coresyskeys[n]);
+    }
   }, 1000.0/60.0);
 }
 
 exports.stopLoop = function() {
+  var fps = numframes / data.frames.elapsed;  
+  console.log(numframes + ' frames in ' + data.frames.elapsed +
+              ' seconds, ' + fps + ' fps');
   clearInterval(int);
   setTimeout(function() {
     clearAll();

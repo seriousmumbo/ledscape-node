@@ -1,11 +1,14 @@
 var ledscape = require('../ledscape');
 
-var data = ledscape.data;
 
 ledscape.addSystems({
   orbit: function(obj) {
+    var data = ledscape.data;
     var delta = data.frames.delta;
-    obj.orbit.pos += delta * obj.orbit.rps * 24;
+    var elapsed = data.frames.elapsed;
+    //obj.orbit.pos += delta * obj.orbit.rps * 24.0;
+    obj.orbit.pos = (elapsed * obj.orbit.rps * 24.0 + 
+                     obj.orbit.start) % 24;
     if (obj.orbit.pos > data.pixels.numpixels) {
       obj.orbit.pos = obj.orbit.pos - data.pixels.numpixels;
     } 

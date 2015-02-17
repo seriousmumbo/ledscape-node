@@ -1,16 +1,17 @@
 var ledscape = require('../ledscape');
 require('./orbit.js');
 
+var BLUE = [0,0,255];
+var YELLOW = [255,255,0];
+var ORANGE = [255,125,0];
+
 ledscape.addData({
-  earth: { orbit: { pos: 2, rps: 0.5 }, 
-           render: { color: 'blue' },
-           controls: { state: 'stopped'}  },
-  venus: { orbit: { pos: 14, rps: 1.0 },
-           controls: { state: 'stopped' },
-           render: { color: 'lightyellow'} },
-  orange:{ orbit: { pos: 8, rps: 0.7 },
-           controls: { state: 'stopped' },
-           render: { color: 'orange' } }
+  earth: { orbit: { start:0, pos: 2, rps: 0.5 }, 
+           render: { color: BLUE } },
+  venus: { orbit: { start:0, pos: 14, rps: 1.0 },
+           render: { color: YELLOW } },
+  orange:{ orbit: { start:0, pos: 8, rps: 0.7 },
+           render: { color: ORANGE } }
 });
 
 planetSetState = function(state) {

@@ -1,7 +1,8 @@
 var path = require("path");
 var wrapper = require("./build/Release/wrapper");
 var glob = require("glob");
-var color = require("color");
+
+var BLACK = [0,0,0];
 
 var pixels = 64;
 var strips = 48;
@@ -66,21 +67,24 @@ outfuncs.fill = function(clr) {
   }
 }
 
+outfuncs.fill(BLACK);
+system.clearAll();
+
 outfuncs.play = function(obj) {
-  outfuncs.fill(color('black'));
+  outfuncs.fill(BLACK);
   system.clearAll();
   setState(obj, 'running');
 }
 
 outfuncs.pause = function(obj) {
   setState(obj, 'paused');
-  outfuncs.fill(color('black'));
+  outfuncs.fill(BLACK);
   system.clearAll();
 }
 
 outfuncs.stop = function(obj) {
   setState(obj, 'stopped');
-  outfuncs.fill(color('black'));
+  outfuncs.fill(BLACK);
   system.clearAll();
 }
 
@@ -98,10 +102,5 @@ outfuncs.anim = function(name) {
 
 module.exports = outfuncs;
 
+
 system.startLoop();
-
-outfuncs.anim('fadesingle');
-outfuncs.play('ring');
-outfuncs.stop('ring');
-
-module.exports = outfuncs;

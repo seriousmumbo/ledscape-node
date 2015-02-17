@@ -1,21 +1,24 @@
 var ledscape = require('../ledscape');
-var color = require('color');
     
 ledscape.addData({
-  ring: { control: { state: 'stopped' },
-          fade: { color: color('cyan'), period: 15.0 } },
-  test: { render: { color: color('blue'), pos: 5 } }
+  ring: { fade: { color: [15,90,90], period: 15.0 } }
 })
 
+var n = 0.0;
+var p = 0;
 ledscape.addSystems({ 
   fade: function(ring) {
-    elapsed = ledscape.data.frames.elapsed;
-      ratio = (1 - Math.cos(2 * Math.PI * (elapsed * 1.0) / (ring.fade.period * 1.0))) / 2;
-    var clr = ring.fade.color.clone().rgb();
-    clr.r *= ratio;
-    clr.g *= ratio;
-    clr.b *= ratio;
-    ledscape.fill(clr);
+    var elapsed = ledscape.data.frames.elapsed;
+    if (elapsed > ring.fade.period/2.0) {
+      n -= 0.5;
+    } else {
+      n += 0.5;
+    }
+    p++;
+    if (p>23) p = 0;
+    var rndn = Math.round(Math.abs(n));
+    var rem = rndn % 255;
+    ledscape.data['p'+p] = { render: { pos: p, color: [0,rem,rem]} };
   }
 });
 
