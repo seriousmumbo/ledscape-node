@@ -37,7 +37,7 @@
     "v8_use_arm_eabi_hardfloat": "true",
     "v8_use_snapshot": "false",
     "want_separate_host_toolset": 0,
-    "nodedir": "/root/.node-gyp/0.10.34",
+    "nodedir": "/root/.node-gyp/0.10.36",
     "copy_dev_lib": "true",
     "standalone_static_library": 1
   }
