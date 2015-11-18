@@ -28,9 +28,9 @@ CFLAGS_CC_Debug := \
 	-fno-exceptions
 
 INCS_Debug := \
-	-I/root/.node-gyp/0.10.34/src \
-	-I/root/.node-gyp/0.10.34/deps/uv/include \
-	-I/root/.node-gyp/0.10.34/deps/v8/include
+	-I/root/.node-gyp/0.10.36/src \
+	-I/root/.node-gyp/0.10.36/deps/uv/include \
+	-I/root/.node-gyp/0.10.36/deps/v8/include
 
 DEFS_Release := \
 	'-D_LARGEFILE_SOURCE' \
@@ -58,9 +58,9 @@ CFLAGS_CC_Release := \
 	-fno-exceptions
 
 INCS_Release := \
-	-I/root/.node-gyp/0.10.34/src \
-	-I/root/.node-gyp/0.10.34/deps/uv/include \
-	-I/root/.node-gyp/0.10.34/deps/v8/include
+	-I/root/.node-gyp/0.10.36/src \
+	-I/root/.node-gyp/0.10.36/deps/uv/include \
+	-I/root/.node-gyp/0.10.36/deps/v8/include
 
 OBJS := \
 	$(obj).target/$(TARGET)/wrapper.o
